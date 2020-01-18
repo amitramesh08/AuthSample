@@ -27,22 +27,22 @@ namespace Auth.AuthSample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAuthentication("CookiesAuth").AddCookie(config =>
-            //{
-            //    config.Cookie.Name = "Grame.Cookies";
-            //    config.LoginPath = "Auth/AuthoizeMe";
-            //});
+            services.AddAuthentication("Cookies").AddCookie(config =>
+            {
+                config.Cookie.Name = "Grame.Cookies";
+                config.LoginPath = "/Auth/AuthoizeMe";
+            });
             //services.AddAuthentication(config =>
             //{
             //    config.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    config.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
             //});
 
-         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-        .AddCookie(options =>
-        {
-            options.LoginPath = "/Auth/AuthoizeMe";
-        });
+           // services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+           //.AddCookie(options =>
+           //{
+           //    options.LoginPath = "/Auth/AuthoizeMe";
+           //});
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
