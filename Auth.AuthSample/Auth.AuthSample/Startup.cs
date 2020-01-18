@@ -35,7 +35,6 @@ namespace Auth.AuthSample
             //services.AddAuthentication(config =>
             //{
             //    config.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-
             //});
 
            // services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
