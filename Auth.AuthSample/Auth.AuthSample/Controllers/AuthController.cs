@@ -38,8 +38,9 @@ namespace Auth.AuthSample.Controllers
             var userPrinciple = new ClaimsPrincipal(new[] { gramIdentity });
 
             HttpContext.SignInAsync(userPrinciple);
-            
-            return RedirectToAction("Index");
+
+            return Ok("Login Successfully");
+            //return RedirectToAction("Index");
         }
         [Route("LogoutUser")]
         public IActionResult Logout()

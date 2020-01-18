@@ -31,7 +31,11 @@ namespace Auth.AuthSample
             {
                 config.Cookie.Name = "Grame.Cookies";
                 config.LoginPath = "/Auth/AuthoizeMe";
+                config.LogoutPath = "/Auth/Index";
+                config.ExpireTimeSpan = TimeSpan.FromMinutes(1);
             });
+
+          
             //services.AddAuthentication(config =>
             //{
             //    config.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -59,6 +63,9 @@ namespace Auth.AuthSample
                 app.UseHsts();
             }
             app.UseAuthentication();
+
+            var cookiePolicyOptions = new CookiePolicyOptions() {  };
+            app.UseCookiePolicy();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
