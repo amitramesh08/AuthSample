@@ -14,6 +14,8 @@ using Microsoft.Extensions.Options;
 using ClaimIdentitySample.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace ClaimIdentitySample
 {
@@ -29,16 +31,25 @@ namespace ClaimIdentitySample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEntityFrameworkInMemoryDatabase().AddDbContext<AppDbContext>(config =>
+            //services.AddEntityFrameworkInMemoryDatabase().AddDbContext<AppDbContext>(config =>
+            //{
+            //    config.UseInMemoryDatabase("Memory");
+            //});
+
+            services.AddDbContext<AppDbContext>(config =>
             {
                 config.UseInMemoryDatabase("Memory");
             });
-            services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders();
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
             //services.AddDbContext<AppDbContext>(config =>
             //{
             //    config.UseInMemoryDatabase("ProductDB");
             //});
-                     
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -53,7 +64,10 @@ namespace ClaimIdentitySample
             {
                 app.UseHsts();
             }
-
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"wwwroot"))
+            });
             app.UseHttpsRedirection();
             app.UseMvc();
         }

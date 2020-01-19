@@ -20,7 +20,7 @@
     "ClaimIdentitySample": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "auth/login",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
