@@ -41,10 +41,22 @@ namespace ClaimIdentitySample
                 config.UseInMemoryDatabase("Memory");
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(config => 
+            {
+                config.Password.RequiredLength = 4;
+                config.Password.RequireUppercase = false;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireDigit = false;
+            })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.Cookie.Name = "Identity.cookie";
+                config.LoginPath = "/Auth/Login";
+                config.LogoutPath = "/Auth/Logout";
+            });
             //services.AddDbContext<AppDbContext>(config =>
             //{
             //    config.UseInMemoryDatabase("ProductDB");

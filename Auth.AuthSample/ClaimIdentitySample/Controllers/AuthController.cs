@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication;
+using System.Threading.Tasks;
 
 namespace Auth.AuthSample.Controllers
 {
     [Route("[controller]")]
     public class AuthController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        public AuthController(UserManager<IdentityUser> userManager, 
+                              SignInManager<IdentityUser> signInManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
         public IActionResult Index()
         {
             return View();
@@ -30,7 +36,7 @@ namespace Auth.AuthSample.Controllers
         {
             return View();
         }
-        [HttpPost]
+        [HttpGet]
         [Route("RegisterUser")]
         public IActionResult Register()
         {
@@ -39,21 +45,52 @@ namespace Auth.AuthSample.Controllers
 
         [Route("Login")]
         [HttpPost]
-        public IActionResult Login(string userName, string password)
+        public async Task<IActionResult> Login(string username, string password)
         {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user != null)
+            {
+                // Sign in user
+                var loginIn = await _signInManager.PasswordSignInAsync(user, user.PasswordHash, true, false);
+                if (loginIn.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
             return RedirectToAction("Index");
         }
-        [HttpGet]
+
+        [HttpPost]
         [Route("RegisterUser")]
-        public IActionResult Register(string userName, string password)
+        public async Task<IActionResult> Register(string username, string password)
         {
+            var user = new IdentityUser()
+            {
+                UserName = username,
+                PasswordHash = password
+            };
+
+            var result = await _userManager.CreateAsync(user);
+            if ( result.Succeeded )
+            {
+                var userResult = await _userManager.FindByNameAsync(username);
+                if (userResult != null)
+                {
+                    // Sign in user
+                    var loginIn = await _signInManager.PasswordSignInAsync(userResult, userResult.PasswordHash, true, false);
+                    if (loginIn.Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
             return RedirectToAction("Index");
         }
 
         [Route("LogoutUser")]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.SignOutAsync();
+            await _signInManager.SignOutAsync();
             return RedirectToAction("Index");
         }
     }
