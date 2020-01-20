@@ -35,7 +35,10 @@ namespace ClaimIdentitySample
             //{
             //    config.UseInMemoryDatabase("Memory");
             //});
+            services.Configure<PasswordHasherOptions>(options => {
 
+                options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV2;
+            });
             services.AddDbContext<AppDbContext>(config =>
             {
                 config.UseInMemoryDatabase("Memory");
@@ -57,6 +60,7 @@ namespace ClaimIdentitySample
                 config.LoginPath = "/Auth/Login";
                 config.LogoutPath = "/Auth/Logout";
             });
+            
             //services.AddDbContext<AppDbContext>(config =>
             //{
             //    config.UseInMemoryDatabase("ProductDB");

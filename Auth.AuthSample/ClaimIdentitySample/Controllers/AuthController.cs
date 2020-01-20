@@ -48,11 +48,12 @@ namespace Auth.AuthSample.Controllers
         public async Task<IActionResult> Login(string username, string password)
         {
             var user = await _userManager.FindByNameAsync(username);
+            
             if (user != null)
             {
                 // Sign in user
-                var loginIn = await _signInManager.PasswordSignInAsync(user, user.PasswordHash, true, false);
-                if (loginIn.Succeeded)
+                //var loginIn = await _signInManager.PasswordSignInAsync(user, password, true,false);
+                //if (loginIn.Succeeded)
                 {
                     return RedirectToAction("Index");
                 }
@@ -77,11 +78,8 @@ namespace Auth.AuthSample.Controllers
                 if (userResult != null)
                 {
                     // Sign in user
-                    var loginIn = await _signInManager.PasswordSignInAsync(userResult, userResult.PasswordHash, true, false);
-                    if (loginIn.Succeeded)
-                    {
-                        return RedirectToAction("Index");
-                    }
+                    await _signInManager.SignInAsync(userResult,isPersistent:false);
+                    //var loginIn = await _signInManager.PasswordSignInAsync(user, password, true, false);
                 }
             }
             return RedirectToAction("Index");
