@@ -80,8 +80,8 @@ namespace Auth.AuthSample.Controllers
                 if (userResult != null)
                 {
                     // Sign in user
-                    await _signInManager.SignInAsync(userResult,isPersistent:false);
-                    //var loginIn = await _signInManager.PasswordSignInAsync(user, password, true, false);
+                    //await _signInManager.SignInAsync(userResult,isPersistent:false);
+                    var loginIn = await _signInManager.PasswordSignInAsync(user, password, true, false);
                 }
             }
             return RedirectToAction("Index");
