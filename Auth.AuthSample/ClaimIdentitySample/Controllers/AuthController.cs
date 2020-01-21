@@ -11,12 +11,13 @@ namespace Auth.AuthSample.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-
+        
         public AuthController(UserManager<IdentityUser> userManager, 
                               SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            
         }
         public IActionResult Index()
         {
@@ -52,7 +53,7 @@ namespace Auth.AuthSample.Controllers
             if (user != null)
             {
                 // Sign in user
-                //var loginIn = await _signInManager.PasswordSignInAsync(user, password, true,false);
+                var loginIn = await _signInManager.PasswordSignInAsync(user, password, true,false);
                 //if (loginIn.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -68,10 +69,11 @@ namespace Auth.AuthSample.Controllers
             var user = new IdentityUser()
             {
                 UserName = username,
-                PasswordHash = password
+                Email = "test@fmail.com",
+                
             };
-
-            var result = await _userManager.CreateAsync(user);
+            string defaultAdminPassword = "Uh#)#USK&uv7";
+            var result = await _userManager.CreateAsync(user, defaultAdminPassword);
             if ( result.Succeeded )
             {
                 var userResult = await _userManager.FindByNameAsync(username);
