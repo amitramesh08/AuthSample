@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.AuthSample", "Auth.AuthSample\Auth.AuthSample.csproj", "{27005884-765F-4E96-A54F-CB5153DA2CE7}"
 EndProject
@@ -9,7 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthClaims", "AuthClaims", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClaimIdentity", "ClaimIdentity", "{64047907-BE4F-431B-84C5-6972244581DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClaimIdentitySample", "ClaimIdentitySample\ClaimIdentitySample.csproj", "{32BD011D-8DB7-47CA-BB70-4A0A1A2CC25A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClaimIdentitySample", "ClaimIdentitySample\ClaimIdentitySample.csproj", "{32BD011D-8DB7-47CA-BB70-4A0A1A2CC25A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizePolicy", "AuthorizePolicy\AuthorizePolicy.csproj", "{C470B422-E2F3-4A8F-8DC6-E020AD5F5806}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{32BD011D-8DB7-47CA-BB70-4A0A1A2CC25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32BD011D-8DB7-47CA-BB70-4A0A1A2CC25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32BD011D-8DB7-47CA-BB70-4A0A1A2CC25A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C470B422-E2F3-4A8F-8DC6-E020AD5F5806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C470B422-E2F3-4A8F-8DC6-E020AD5F5806}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C470B422-E2F3-4A8F-8DC6-E020AD5F5806}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C470B422-E2F3-4A8F-8DC6-E020AD5F5806}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
