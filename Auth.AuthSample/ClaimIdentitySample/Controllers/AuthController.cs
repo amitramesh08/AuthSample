@@ -53,7 +53,7 @@ namespace Auth.AuthSample.Controllers
             if (user != null)
             {
                 // Sign in user
-                var loginIn = await _signInManager.PasswordSignInAsync(user, password, true,false);
+                var loginIn = await _signInManager.PasswordSignInAsync(user, password, false,false);
                 //if (loginIn.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -81,7 +81,7 @@ namespace Auth.AuthSample.Controllers
                 {
                     // Sign in user
                     //await _signInManager.SignInAsync(userResult,isPersistent:false);
-                    var loginIn = await _signInManager.PasswordSignInAsync(user, password, true, false);
+                    var loginIn = await _signInManager.PasswordSignInAsync(user, password, false, false);
                 }
             }
             return RedirectToAction("Index");

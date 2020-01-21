@@ -81,11 +81,13 @@ namespace ClaimIdentitySample
             {
                 app.UseHsts();
             }
+            app.UseAuthentication();
             app.UseStaticFiles(new StaticFileOptions()
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"wwwroot"))
             });
             app.UseHttpsRedirection();
+            
             app.UseMvc();
         }
     }

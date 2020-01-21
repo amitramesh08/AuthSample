@@ -27,3 +27,9 @@ app.UseStaticFiles(new StaticFileOptions()
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"wwwroot"))
             });
+
+
+
+# Always use Authentication middleware in configure method.
+app.UseAuthentication();
+
