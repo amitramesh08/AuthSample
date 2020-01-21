@@ -72,8 +72,8 @@ namespace Auth.AuthSample.Controllers
                 Email = "test@fmail.com",
                 
             };
-            string defaultAdminPassword = "Uh#)#USK&uv7";
-            var result = await _userManager.CreateAsync(user, defaultAdminPassword);
+            
+            var result = await _userManager.CreateAsync(user, password);
             if ( result.Succeeded )
             {
                 var userResult = await _userManager.FindByNameAsync(username);

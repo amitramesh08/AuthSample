@@ -50,6 +50,7 @@ namespace ClaimIdentitySample
                 config.Password.RequireUppercase = false;
                 config.Password.RequireNonAlphanumeric = false;
                 config.Password.RequireDigit = false;
+                config.Password.RequireLowercase = false;
             })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
